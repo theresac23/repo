@@ -5,11 +5,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 /** Driver class for Gitlet, the tiny stupid version-control system.
- *  @author tonkesa
+ *  @author theresachen
  */
 public class Main {
-    /** Our working directory that will track files
-     * and hold .gitlet directory. **/
+    /** Our working directory that will track files and hold .gitlet directory. **/
     static final File WD = new File(System.getProperty("user.dir"));
 
     /** Usage: java gitlet.Main ARGS, where ARGS contains
@@ -75,7 +74,7 @@ public class Main {
         System.exit(0);
     }
 
-    /** Method. **/
+    /** Method for debugging. **/
     public static void printHeads() {
         @SuppressWarnings("unchecked")
         HashMap<String, String> headHM = Utils.readObject(Repo.HEADS,
@@ -83,7 +82,7 @@ public class Main {
         System.out.print(headHM.keySet());
         System.exit(0);
     }
-    /** Method. **/
+    /** Method for debugging. **/
     public static void printRemoves() {
         @SuppressWarnings("unchecked")
         HashSet<String> removes = Utils.readObject(new File(
@@ -92,7 +91,7 @@ public class Main {
         System.out.print(removes);
         System.exit(0);
     }
-    /** Method. **/
+
     public static void initGit() {
         if (Repo.GITLET.exists()) {
             System.out.println("A Gitlet version-control system "
@@ -101,8 +100,7 @@ public class Main {
             Repo.initialize();
         }
     }
-    /** Method.
-     * @param args **/
+
     private static void add(String[] args) {
         File toAdd = Utils.join(WD, args[1]);
         if (toAdd.exists()) {
@@ -113,8 +111,6 @@ public class Main {
         System.exit(0);
     }
 
-    /** Method.
-     * @param args **/
     private static void commit(String[] args) {
         if (args.length < 2 || args[1].equals("")) {
             System.out.print("Please enter a commit message.");
@@ -124,22 +120,16 @@ public class Main {
         System.exit(0);
     }
 
-    /** Method.
-     * @param args **/
     private static void remove(String[] args) {
         Repo.remove(args[1]);
         System.exit(0);
     }
 
-    /** Method.
-     * @param args **/
     private static void log(String[] args) {
         Repo.log();
         System.exit(0);
     }
 
-    /** Method.
-     * @param args **/
     private static void globalLog(String[] args) {
         Repo.globalLog();
         System.exit(0);
@@ -152,15 +142,11 @@ public class Main {
         System.exit(0);
     }
 
-    /** Method.
-     * @param args **/
     private static void status(String[] args) {
         Repo.status();
         System.exit(0);
     }
-
-    /** Method.
-     * @param args **/
+    
     private static void checkout(String[] args) {
         if (args.length == 3) {
             if (!args[1].equals("--")) {
@@ -180,29 +166,21 @@ public class Main {
         System.exit(0);
     }
 
-    /** Method.
-     * @param args **/
     private static void branch(String[] args) {
         Repo.branch(args[1]);
         System.exit(0);
     }
 
-    /** Method.
-     * @param args **/
     private static void removeB(String[] args) {
         Repo.removeB(args[1]);
         System.exit(0);
     }
 
-    /** Method.
-     * @param args **/
     private static void reset(String[] args) {
         Repo.reset(args[1]);
         System.exit(0);
     }
 
-    /** Method.
-     * @param args **/
     private static void merge(String[] args) {
         Repo.merge(args[1]);
         System.exit(0);
