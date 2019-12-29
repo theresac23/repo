@@ -15,25 +15,23 @@ import java.util.TimeZone;
  * @author theresachen **/
 
 public class Repo {
-    /** Variable. **/
+
     static final File GITLET = Utils.join(Main.WD, ".gitlet");
-    /** Variable. **/
+
     static final File BRANCHES = Utils.join(GITLET, "branches");
-    /** Variable. **/
+
     static final File STAGE = Utils.join(GITLET, "stage");
-    /** Variable. **/
+
     static final File BLOBS = Utils.join(GITLET, "blobs");
-    /** Variable. **/
+
     static final File TRACKER = Utils.join(GITLET, "tracker");
-    /** Variable. **/
+
     static final File CURBRANCH = Utils.join(TRACKER, "curBranch");
-    /** Variable. **/
+
     static final File HEADS = Utils.join(TRACKER, "heads");
-    /** Variable. **/
+
     static final File SHALIST = Utils.join(TRACKER, "shaList");
 
-    /** Method.
-     * @return idk **/
     private static String getDate() {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat(
@@ -42,8 +40,7 @@ public class Repo {
         return dateFormat.format(date);
     }
 
-
-    /** Method. **/
+    /** Initializing .gitlet directory. **/
     public static void initialize() {
         GITLET.mkdirs();
         BRANCHES.mkdir();
@@ -79,8 +76,7 @@ public class Repo {
         Utils.writeObject(SHALIST, shaList);
     }
 
-    /** Method.
-     * @param toAdd idk **/
+    /** Staging a file. **/
     public static void add(File toAdd) {
         File removesF = new File(System.getProperty("user.dir")
                 + "/.gitlet/tracker/removes");
@@ -125,9 +121,7 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param message idk
-     * @param secondParent idk **/
+    /** Commits files in staging area. **/
     public static void commit(String message, String secondParent) {
         @SuppressWarnings("unchecked")
         HashSet<String> toRemove = Utils.readObject(new File(
@@ -180,7 +174,7 @@ public class Repo {
         }
     }
 
-    /** Method. **/
+    /** Prints log of commits starting from the current branch. **/
     public static void log() {
         String curBranch = Utils.readObject(CURBRANCH, String.class);
         @SuppressWarnings("unchecked")
@@ -212,7 +206,7 @@ public class Repo {
         System.out.println(toLog._message);
     }
 
-    /** Method. **/
+    /** Prints log of commits across all branches. **/
     public static void globalLog() {
         File[] allCommitsF = BRANCHES.listFiles();
         if (allCommitsF != null) {
@@ -230,16 +224,13 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param file idk **/
+    /** Reverting given file in the WD to the file in the current head commit. **/
     public static void checkoutHead(String file) {
         Commit toLog = getHeadCom();
         checkout(file, toLog);
     }
 
-    /** Method.
-     * @param file idk
-     * @param id idk **/
+    /** Reverting all files in WD to the files of the given commit. **/
     public static void checkoutCommit(String id, String file) {
         if (id.length() < REGLENGTH) {
             @SuppressWarnings("unchecked")
@@ -260,8 +251,7 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param branchName idk **/
+    /** Reverting all files in WD to files in the head of the given branch. **/
     public static void checkoutBranch(String branchName) {
         String curBranch = Utils.readObject(CURBRANCH, String.class);
         if (curBranch.equals(branchName)) {
@@ -293,9 +283,7 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param fromCopy idk
-     * @param toHM idk **/
+    /** A helper method to transfer contents from one commit's files to another. **/
     private static void transfer(HashMap<String, String> toHM,
                                  HashMap<String, String> fromCopy) {
         for (String fileName : toHM.keySet()) {
@@ -335,8 +323,7 @@ public class Repo {
     /** Length of normal sha. */
     private static final int REGLENGTH = 40;
 
-    /** Method.
-     * @param id idk **/
+    /** Resetting WD files to files in the given commit, moving head pointer to a given commit. **/
     public static void reset(String id) {
         if (id.length() < REGLENGTH) {
             @SuppressWarnings("unchecked")
@@ -375,9 +362,7 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param check idk
-     * @param file idk **/
+    /** Helper method for the three different checkout commands. **/
     public static void checkout(String file, Commit check) {
         if (!check._blobs.containsKey(file)) {
             System.out.println("File does not exist in that commit.");
@@ -396,8 +381,7 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param file idk **/
+    /** Removes a file from the staging area and untracks it from the next commit. **/
     public static void remove(String file) {
         boolean deleted;
 
@@ -422,7 +406,7 @@ public class Repo {
         }
     }
 
-    /** Method. **/
+    /** Gives status of gitlet. **/
     public static void status() {
         System.out.println("=== Branches ===");
         @SuppressWarnings("unchecked")
@@ -469,8 +453,7 @@ public class Repo {
         System.out.println("=== Untracked Files ===");
     }
 
-    /** Method.
-     * @param message idk **/
+    /** Prints all commit id's with the given message. **/
     public static void find(String message) {
         File[] allCommits = BRANCHES.listFiles();
         HashSet<String> toPrint = new HashSet<>();
@@ -490,8 +473,7 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param name idk **/
+    /** Creates a new branch. **/
     public static void branch(String name) {
         @SuppressWarnings("unchecked")
         HashMap<String, String> headHM = Utils.readObject(HEADS, HashMap.class);
@@ -505,8 +487,7 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param branch idk **/
+    /** Removes a branch. **/
     public static void removeB(String branch) {
         HashMap headHM = Utils.readObject(HEADS, HashMap.class);
         if (!headHM.containsKey(branch)) {
@@ -522,8 +503,7 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param branch idk **/
+    /** Merges the current branch head with the given branch head. **/
     public static void merge(String branch) {
         checkStage();
         checkCurBranch(branch);
@@ -579,12 +559,7 @@ public class Repo {
     /** Checking if there was a merge conflict. **/
     private static boolean conflict = false;
 
-    /** Method.
-     * @param cCopy idk
-     * @param mBlobs idk
-     * @param mergeCommit idk
-     * @param sCopy idk
-     * @return idk **/
+    /** Helper method for all the different cases of merging. **/
     private static HashMap[] mergeHelper(HashMap<String, String> cCopy,
                                          HashMap<String,
             String> mBlobs, HashMap<String, String> sCopy, Commit mergeCommit) {
@@ -635,13 +610,9 @@ public class Repo {
         return new HashMap[]{cCopy, sCopy};
     }
 
-    /** Method.
-     * @param blob idk
-     * @param cCopy idk
-     * @param mBlobs idk **/
+    /** Helper method that merges files with merge conflicts. **/
     private static void mergeConflict(HashMap<String, String> cCopy,
-                                      HashMap<String, String> mBlobs,
-                                      String blob) {
+                          HashMap<String, String> mBlobs, String blob) {
         String curCont = "";
         if (!cCopy.isEmpty()) {
             File curBlob = Utils.join(BLOBS, cCopy.get(blob));
@@ -663,9 +634,7 @@ public class Repo {
         Utils.writeContents(confictFile, content);
     }
 
-    /** Method.
-     * @param cCopy hashmap
-     * @param sCopy hashmap **/
+    /** A helper method for merge. **/
     private static void mergeHelper2(HashMap<String, String> cCopy,
                                      HashMap<String, String> sCopy) {
         for (String blob : cCopy.keySet()) {
@@ -682,10 +651,7 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param findBranch idk
-     * @param checkBranch idk
-     * @return idk**/
+    /** Finds the split point between current and given branches. **/
     private static String findSplit(String checkBranch, String findBranch) {
         @SuppressWarnings("unchecked")
         HashMap<String, String> headsHM = Utils.readObject(HEADS,
@@ -727,7 +693,6 @@ public class Repo {
         return checkCommit._sha;
     }
 
-    /** Method. **/
     private static void checkStage() {
         File[] checkStage = STAGE.listFiles();
         if (checkStage.length > 0) {
@@ -736,8 +701,6 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param branch **/
     private static void checkCurBranch(String branch) {
         String curBranch = Utils.readObject(CURBRANCH, String.class);
         if (branch.equals(curBranch)) {
@@ -746,8 +709,7 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @param branch **/
+    /** Helper method. **/
     private static void checkHeadHM(String branch) {
         @SuppressWarnings("unchecked")
         HashMap<String, String> headsHM = Utils.readObject(HEADS,
@@ -758,8 +720,7 @@ public class Repo {
         }
     }
 
-    /** Method.
-     * @return Commit**/
+    /** Helper Method. **/
     public static Commit getHeadCom() {
         String curBranch = Utils.readObject(CURBRANCH, String.class);
         @SuppressWarnings("unchecked")
