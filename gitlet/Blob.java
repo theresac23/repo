@@ -5,8 +5,7 @@ import java.io.Serializable;
 /** Blob objects that will be stored in blob files.
  * @author theresachen **/
 public class Blob implements Serializable {
-    /** Blob constructor.
-     * @param contents idk **/
+    /** Blob constructor.**/
     public Blob(String contents) {
         _contents = contents;
         sha = Utils.sha1(_contents);
