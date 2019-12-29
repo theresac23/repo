@@ -10,11 +10,7 @@ import java.util.List;
  * @author theresachen **/
 public class Commit implements Serializable {
 
-    /** A serializable commit object constructor.
-     * @param message idk
-     * @param blobs idk
-     * @param parentSHA idk
-     * @param timeStamp idk */
+    /** A serializable commit object constructor. */
     public Commit(String message, String[] parentSHA, String timeStamp,
                    HashMap<String, String> blobs) {
         this._message = message;
