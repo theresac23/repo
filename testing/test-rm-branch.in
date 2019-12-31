@@ -1,0 +1,22 @@
+> init
+<<<
++ p.txt wug.txt
++ q.txt wug.txt
++ o.txt wug.txt
++ u.txt wug.txt
+> add q.txt
+<<<
+> add o.txt
+<<<
+> add u.txt
+<<<
+> commit "hilfinger has the fattest twerks"
+<<<
+> branch next
+<<<
+> rm-branch next
+<<<
+> add p.txt
+<<<
+> commit "and thats a FACT"
+<<<

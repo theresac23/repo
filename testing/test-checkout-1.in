@@ -1,0 +1,25 @@
+> init
+<<<
++ p.txt wug.txt
++ q.txt wug.txt
++ o.txt wug.txt
++ u.txt wug.txt
+> add q.txt
+<<<
+> add o.txt
+<<<
+> add u.txt
+<<<
+> commit "hello"
+<<<
+> branch next
+<<<
+> rm-branch nope
+A branch with that name does not exist.
+<<<
+> add p.txt
+<<<
+> commit "helloo"
+<<<
+> checkout -- u.txt
+<<< 

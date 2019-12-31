@@ -1,0 +1,13 @@
+> init
+<<<
++ q.txt wug.txt
++ o.txt wug.txt
++ u.txt wug.txt
+> add q.txt
+<<<
+> add o.txt
+<<<
+> add u.txt
+<<<
+> commit "hilfinger has the fattest twerks"
+<<<

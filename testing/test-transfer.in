@@ -1,0 +1,20 @@
+# Testing if files come out correct after using checkout branch.
+> init
+<<<
++ h.txt wug2.txt
++ k.txt wug3.txt
+> add h.txt
+<<<
+> add k.txt
+<<<
+> commit "added h and k"
+<<<
+> branch other
+<<<
+> rm h.txt
+<<<
+> commit "removed h"
+<<<
+> checkout other
+<<<
+= h.txt wug2.txt

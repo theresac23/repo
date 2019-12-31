@@ -1,0 +1,15 @@
+> init
+<<<
++ p.txt wug.txt
++ q.txt wug.txt
++ o.txt wug.txt
++ u.txt wug.txt
+> add p.txt
+<<<
+> add q.txt
+<<<
+> add o.txt
+<<<
+> add u.txt
+<<<
+
