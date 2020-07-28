@@ -1,1 +1,1 @@
-# repo-bepo
+A repository containing Gitlet and Enigma projects.
